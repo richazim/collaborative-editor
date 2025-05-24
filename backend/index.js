@@ -6,14 +6,14 @@ const dotenv = require("dotenv");
 
 dotenv.config(); // Charger les variables d'environnement depuis le fichier .env
 
-const app = express();
+const app = express(); // app est une instance de l'application Express qui gère les routes et les middlewares
 app.use(cors({
-    origin: "http://localhost"
+    origin: process.env.CLIENT_ORIGIN
 }));
 
 const API_PORT = process.env.API_PORT || 5000;
 
-const httpServer = http.createServer(app); // Créer un serveur http qui écoute sur le port 80 seulement
+const httpServer = http.createServer(app); // Créer un serveur http basé sur l'application Express qui écoute sur le port 80 seulement
 // On utilise http.createServer(app) pour pouvoir brancher WebSocket dessus, car app.listen() est une abstraction qui cache le serveur HTTP sous-jacent.
 
 httpServer.listen(API_PORT, () => {
@@ -27,10 +27,10 @@ const wsServer = new WebSocket.Server({ server: httpServer }); // serveur WebSoc
 // Change le protocole http avec le protocole ws (websocket)
 // Permet aux clients de faire les connexions "ws://"
 
-wsServer.on("connection", (clientSocket) => { // Si un client WebSocket se connecte au serveur websocket
+wsServer.on("connection", (clientSocket) => { // Écouter les connexions entrantes de clients WebSocket.
     console.log("🔗 Nouveau client WebSocket connecté");
 
-    clientSocket.send(JSON.stringify({ // Envoie le contenu initial du text partagé au client
+    clientSocket.send(JSON.stringify({ // Envoie le message initial du text partagé au client
         type: "init",
         data: sharedTextContent
     }));
