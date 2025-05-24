@@ -17,7 +17,7 @@ const httpServer = http.createServer(app); // Créer un serveur http basé sur l
 // On utilise http.createServer(app) pour pouvoir brancher WebSocket dessus, car app.listen() est une abstraction qui cache le serveur HTTP sous-jacent.
 
 httpServer.listen(API_PORT, () => {
-    console.log(`✅ Serveur HTTP démarré sur le port ${API_PORT}`);
+    console.log(`Serveur HTTP démarré sur le port ${API_PORT}`);
 });
 
 
@@ -54,11 +54,11 @@ wsServer.on("connection", (clientSocket) => { // Écouter les connexions entrant
             }
 
         } catch (error) {
-            console.error("❌ Erreur lors de l'analyse du message :", error);
+            console.error("Erreur lors de l'analyse du message :", error);
         }
     });
 
     clientSocket.on("close", () => {
-        console.log("🔌 Client WebSocket déconnecté");
+        console.log("Client WebSocket déconnecté");
     });
 });

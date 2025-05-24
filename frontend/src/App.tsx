@@ -7,7 +7,7 @@ function App() {
   const [webSocketConnection, setWebSocketConnection] = useState<WebSocket | null>(null);
 
   useEffect(() => {
-    const socketInstance = new WebSocket(import.meta.env.BASE_URL); // Lors du montage du composant, le client (navigateur) initie la connexion websocket vers le serveur
+    const socketInstance = new WebSocket(import.meta.env.VITE_WS_URL); // Lors du montage du composant, le client (navigateur) initie la connexion websocket vers le serveur
 
     setWebSocketConnection(socketInstance);
 
@@ -27,7 +27,7 @@ function App() {
     };
 
     socketInstance.onclose = () => { // Le client reçoit un evènement onclose au moment où le canal de communication entre le client (ex. navigateur) et le serveur est interrompu.
-      console.log("🔌 Connexion WebSocket fermée");
+      console.log("Connexion WebSocket fermée");
     };
 
     socketInstance.onerror = (error) => {
