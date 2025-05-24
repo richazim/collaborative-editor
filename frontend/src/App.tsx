@@ -12,7 +12,7 @@ function App() {
     setWebSocketConnection(socketInstance);
 
     socketInstance.onopen = () => { // Le client reçoit un événement onopen quand la connexion est active (le serveur est prêt pour communiquer avec lui)
-      console.log("✅ Connexion WebSocket établie");
+      console.log("Connexion WebSocket établie");
     };
     socketInstance.onmessage = (event) => { // Le client reçoit un évènement onmessage quand le serveur lui envoie une donnée
       try {
@@ -22,7 +22,7 @@ function App() {
           setSharedText(receivedMessage.data);
         }
       } catch (error) {
-        console.error('❌ Erreur de parsing du message reçu :', error);
+        console.error('Erreur de parsing du message reçu :', error);
       }
     };
 
