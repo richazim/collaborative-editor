@@ -7,7 +7,7 @@ function App() {
   const [webSocketConnection, setWebSocketConnection] = useState<WebSocket | null>(null);
 
   useEffect(() => {
-    const socketInstance = new WebSocket('ws://localhost:80'); // Lors du montage du composant, le client (navigateur) initie la connexion websocket vers le serveur
+    const socketInstance = new WebSocket(import.meta.env.BASE_URL); // Lors du montage du composant, le client (navigateur) initie la connexion websocket vers le serveur
 
     setWebSocketConnection(socketInstance);
 
@@ -30,8 +30,8 @@ function App() {
       console.log("🔌 Connexion WebSocket fermée");
     };
 
-    socketInstance.onerror = (error) => { // évènement lancé lorsqu'une erreur de connexion survient
-      console.error("⚠️ Erreur WebSocket :", error);
+    socketInstance.onerror = (error) => {
+      console.error("Erreur WebSocket :", error);
     };
 
     return () => {
